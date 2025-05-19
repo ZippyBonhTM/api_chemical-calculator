@@ -1,0 +1,20 @@
+{
+  "name": "api-chemical-calculator",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/ZippyBonhTM/api-chemical-calculator#readme",
+  "bugs": {
+    "url": "https://github.com/ZippyBonhTM/api-chemical-calculator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZippyBonhTM/api-chemical-calculator.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
