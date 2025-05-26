@@ -13,7 +13,7 @@ const ValueWithLinkSchema = new Schema({
       message: (props: any) => `${props.value} is not a valid URL!`,
     },
   },
-});
+}, { _id: false });
 
 const ElementSchema = new Schema({
   name: { type: ValueWithLinkSchema, required: true },

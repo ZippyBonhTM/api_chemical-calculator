@@ -1,7 +1,14 @@
+import dotenv from "dotenv";
+const result = dotenv.config();
+if (result.error) {
+  console.error(result.error);
+}
+
 import express from "express";
-import elementRoutes from "./routes/elementRoutes";
+import elementRoutes from "@routes/elementRoutes";
 
 const PORT = process.env.PORT || 3000;
+
 const app = express();
 
 app.use(express.json());
@@ -11,5 +18,5 @@ app.use("/", elementRoutes);
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}.`);
-  console.log(`Rota base: http://localhost:${PORT}`);
+  console.log(`Rota base: http://localhost:${PORT}/api/v1/`);
 });

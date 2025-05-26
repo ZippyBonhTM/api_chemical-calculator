@@ -17,7 +17,7 @@ const ValueWithLinkSchema = new mongoose_1.Schema({
             message: (props) => `${props.value} is not a valid URL!`,
         },
     },
-});
+}, { _id: false });
 const ElementSchema = new mongoose_1.Schema({
     name: { type: ValueWithLinkSchema, required: true },
     symbol: { type: ValueWithLinkSchema, required: true },

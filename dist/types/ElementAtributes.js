@@ -84,22 +84,22 @@ exports.ElementCategoryInfo = {
 exports.ElementStateInfo = {
     [ElementState.SOLID]: {
         label: "Solid",
-        color: "#A52A2A", // Marrom
+        color: "#A52A2A",
         infoLink: "https://en.wikipedia.org/wiki/Solid",
     },
     [ElementState.LIQUID]: {
         label: "Liquid",
-        color: "#1E90FF", // Azul vibrante
+        color: "#1E90FF",
         infoLink: "https://en.wikipedia.org/wiki/Liquid",
     },
     [ElementState.GAS]: {
         label: "Gas",
-        color: "#FFD700", // Dourado
+        color: "#FFD700",
         infoLink: "https://en.wikipedia.org/wiki/Gas",
     },
     [ElementState.UNKNOWN]: {
         label: "Unknown",
-        color: "#808080", // Cinza
+        color: "#808080",
         infoLink: "https://en.wikipedia.org/wiki/State_of_matter",
     },
 };
