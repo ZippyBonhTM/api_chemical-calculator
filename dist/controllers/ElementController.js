@@ -1,11 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const database_1 = require("../database");
+const database_1 = __importDefault(require("../database"));
 class ElementController {
     static async createElement(req, res, next) {
         try {
             const protoElement = req.body;
-            await database_1.db.elements.create(protoElement);
+            await database_1.default.elements.create(protoElement);
             res.status(201).json({ message: "Elemento criado com sucesso!" });
         }
         catch (err) {
@@ -14,7 +17,7 @@ class ElementController {
     }
     static async getAllElements(_, res, next) {
         try {
-            const allElements = await database_1.db.elements.find();
+            const allElements = await database_1.default.elements.find();
             res.status(200).json(allElements);
         }
         catch (err) {
@@ -26,7 +29,7 @@ class ElementController {
             const elementId = req.params.id;
             if (!elementId)
                 res.status(400).json({ message: 'Valor "id" não foi encontrado! Passe pelos parâmetros da URL!' });
-            await database_1.db.elements.deleteOne({ _id: elementId });
+            await database_1.default.elements.deleteOne({ _id: elementId });
             res.status(200).json({ message: "Elemento removido com sucesso!" });
         }
         catch (err) {
@@ -42,7 +45,7 @@ class ElementController {
                     message: "Um ou mais dados estão ausentes! Certifique-se de passar o id pelo parâmetro da url e os dados a serem atualizados!"
                 });
             }
-            const updatedElement = await database_1.db.elements.findByIdAndUpdate(ElementId, ElementData);
+            const updatedElement = await database_1.default.elements.findByIdAndUpdate(ElementId, ElementData);
             res.status(200).json({ message: "Elemento editado com sucesso!", updatedElement });
         }
         catch (err) {

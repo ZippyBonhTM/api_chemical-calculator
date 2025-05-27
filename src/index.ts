@@ -3,18 +3,13 @@ const result = dotenv.config();
 if (result.error) {
   console.error(result.error);
 }
-
 import express from "express";
-import elementRoutes from "@routes/elementRoutes";
+import routes from "./routes";
 
 const PORT = process.env.PORT || 3000;
 
 const app = express();
-
-app.use(express.json());
-
-// Aplicando as rotas
-app.use("/", elementRoutes);
+routes(app); // Aplica as rotas
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}.`);

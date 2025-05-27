@@ -36,18 +36,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.db = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const Element_1 = __importDefault(require("./schemas/Element"));
 const MONGODB_URI = process.env.MONGODB_URI;
 if (!MONGODB_URI)
-    throw new Error("Não consegui encontrar a URI nas variáveis de ambiente!");
+    throw new Error("Não consegui encontrar a URI do MongoDB nas variáveis de ambiente!");
 mongoose_1.default.connect(MONGODB_URI).then(() => {
     console.log("Connected to MongoDB successfully!");
 }).catch((err) => {
     console.error(`Error connection to MongoDB: ${err}`);
     process.exit(1);
 });
-exports.db = {
+const db = {
     elements: (0, mongoose_1.model)("element", Element_1.default, "elements")
 };
+exports.default = db;

@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ElementType } from "../types/ElementAtributes";
 import db from "../database";
+import paramsProcessor from "./utils/paramsProcessor";
 
 export default class ElementController {
   /**
@@ -14,9 +15,9 @@ export default class ElementController {
     try {
       const protoElement: ElementType = req.body;
 
-      await db.elements.create(protoElement);
+      const newElement = await db.elements.create(protoElement);
 
-      res.status(201).json({ message: "Elemento criado com sucesso!" });
+      res.status(201).send(newElement.toJSON());
     } catch (err) {
       next(err);
     }
@@ -31,7 +32,7 @@ export default class ElementController {
   */
   static async getAllElements(_: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const allElements = await db.elements.find();
+      const allElements = db.elements.find();
 
       res.status(200).json(allElements);
     } catch (err) {
@@ -49,9 +50,9 @@ export default class ElementController {
   static async deleteElementById(req: Request, res: Response, next: NextFunction) {
     try {
       const elementId = req.params.id;
-      if (!elementId) res.status(400).json({ message: 'Valor "id" não foi encontrado! Passe pelos parâmetros da URL!' });
 
-      await db.elements.deleteOne({ _id: elementId });
+      const result = await db.elements.deleteOne({ _id: elementId });
+      if (result.deletedCount === 0) res.status(304).json({ message: "Nenhum elemento foi encontrado para ser deletado!" });
 
       res.status(200).json({ message: "Elemento removido com sucesso!" });
     } catch (err) {
@@ -80,6 +81,21 @@ export default class ElementController {
       const updatedElement = await db.elements.findByIdAndUpdate(ElementId, ElementData);
 
       res.status(200).json({ message: "Elemento editado com sucesso!", updatedElement });
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getElementsByFilter(req: Request, res: Response, next: NextFunction) {
+    try {
+      const filter = paramsProcessor(req.query);
+
+      if (filter) {
+        const elements = db.elements.find(filter);
+        res.status(200).send(elements);
+      } else {
+        res.status(200).send([]);
+      }
     } catch (err) {
       next(err);
     }
