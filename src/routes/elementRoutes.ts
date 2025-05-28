@@ -5,7 +5,7 @@ const elementRoutes = Router();
 
 elementRoutes
   .get("/api/v1/elements", ElementController.getAllElements)
-  .get("/api/v1/elements/filter", ElementController.getElementsByFilter)
+  .get("/api/v1/elements/:id", ElementController.getElementById)
   .post("/api/v1/elements", ElementController.createElement)
   .delete("/api/v1/elements/:id", ElementController.deleteElementById)
   .put("/api/v1/elements/:id", ElementController.updateElementById)

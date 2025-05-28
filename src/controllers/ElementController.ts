@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { ElementType } from "../types/ElementAtributes";
 import db from "../database";
-import paramsProcessor from "./utils/paramsProcessor";
+import elementParamsProcessor from "./utils/elementParamsProcessor";
 
 export default class ElementController {
   /**
@@ -11,7 +11,7 @@ export default class ElementController {
   * @returns Resposta com status 201 e os dados do elemento criado.
   * @throws Lança erro se os dados forem inválidos ou houver falha no banco de dados.
   */
-  static async createElement(req: Request, res: Response, next: NextFunction): Promise<void> {
+  static async createElement(req: Request, res: Response, next: NextFunction) {
     try {
       const protoElement: ElementType = req.body;
 
@@ -30,11 +30,67 @@ export default class ElementController {
   * @returns Resposta com status 200 e os dados.
   * @throws Lança erro se os dados forem inválidos ou houver falha no banco de dados.
   */
-  static async getAllElements(_: Request, res: Response, next: NextFunction): Promise<void> {
+  static async getAllElements(req: Request, res: Response, next: NextFunction) {
     try {
-      const allElements = db.elements.find();
+      if (req.query) {
+        const filter = elementParamsProcessor(req.query);
+        if (filter.errors.length === 0) {
+          if (filter) {
+            const elements = await db.elements.find(filter.query).lean().exec();
+            res.status(200).send(elements);
+          } else {
+            res.status(200).send([]);
+          }
+        } else {
+          res.status(400).json({ message: "Sua query params está inválida!", erros: filter.errors });
+        }
 
-      res.status(200).json(allElements);
+      } else {
+        const allElements = db.elements.find().lean().exec();
+        res.status(200).json(allElements);
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  static async getElementById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const elementId = req.params.id;
+
+      const element = await db.elements.findById(elementId);
+
+      if (!element) {
+        res.status(400).json({ message: "Nenhum elemento foi encontrado!" });
+      } else {
+        res.status(200).send(element.toJSON());
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+
+  /**
+   * Edita um elemento já existente apartir do id do elemento e os dados em formato json.
+   * @param req - Dados que serão utilizados (parâmetros de url: "id_do_elemento", body: "dados_a_serem_atualizados").
+   * @param res - Resposta da requisição.
+   * @returns Resposta com status 200 e o elemento editado.
+   * @throws Lança erro se os dados forem inválidos ou houver falha no banco de dados.
+   */
+  static async updateElementById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const ElementId = req.params.id;
+      const ElementData = req.body;
+
+      if (!ElementId || !ElementData) {
+        res.status(400).json({
+          message: "Um ou mais dados estão ausentes! Certifique-se de passar o id pelo parâmetro da url e os dados a serem atualizados!"
+        });
+      }
+
+      const updatedElement = await db.elements.findByIdAndUpdate(ElementId, ElementData).lean().exec();
+
+      res.status(200).json({ message: "Elemento editado com sucesso!", updatedElement });
     } catch (err) {
       next(err);
     }
@@ -60,44 +116,4 @@ export default class ElementController {
     }
   }
 
-  /**
-   * Edita um elemento já existente apartir do id do elemento e os dados em formato json.
-   * @param req - Dados que serão utilizados (parâmetros de url: "id_do_elemento", body: "dados_a_serem_atualizados").
-   * @param res - Resposta da requisição.
-   * @returns Resposta com status 200 e o elemento editado.
-   * @throws Lança erro se os dados forem inválidos ou houver falha no banco de dados.
-   */
-  static async updateElementById(req: Request, res: Response, next: NextFunction) {
-    try {
-      const ElementId = req.params.id;
-      const ElementData = req.body;
-
-      if (!ElementId || !ElementData) {
-        res.status(400).json({
-          message: "Um ou mais dados estão ausentes! Certifique-se de passar o id pelo parâmetro da url e os dados a serem atualizados!"
-        });
-      }
-
-      const updatedElement = await db.elements.findByIdAndUpdate(ElementId, ElementData);
-
-      res.status(200).json({ message: "Elemento editado com sucesso!", updatedElement });
-    } catch (err) {
-      next(err);
-    }
-  }
-
-  static async getElementsByFilter(req: Request, res: Response, next: NextFunction) {
-    try {
-      const filter = paramsProcessor(req.query);
-
-      if (filter) {
-        const elements = db.elements.find(filter);
-        res.status(200).send(elements);
-      } else {
-        res.status(200).send([]);
-      }
-    } catch (err) {
-      next(err);
-    }
-  }
 };
