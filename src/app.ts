@@ -15,3 +15,5 @@ app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}.`);
   console.log(`Rota base: http://localhost:${PORT}/api/v1/`);
 });
+
+export default app;
