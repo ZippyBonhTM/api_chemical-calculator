@@ -35,7 +35,7 @@ export default class ElementController {
       if (req.query) {
         const filter = elementParamsProcessor(req.query);
         if (filter.errors.length === 0) {
-          if (filter) {
+          if (filter.query) {
             const elements = await db.elements.find(filter.query).lean().exec();
             res.status(200).send(elements);
           } else {
