@@ -115,5 +115,4 @@ export default class ElementController {
       next(err);
     }
   }
-
 };

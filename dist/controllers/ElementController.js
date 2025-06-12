@@ -33,7 +33,7 @@ class ElementController {
                 if (req.query) {
                     const filter = (0, elementParamsProcessor_1.default)(req.query);
                     if (filter.errors.length === 0) {
-                        if (filter) {
+                        if (filter.query) {
                             const elements = yield database_1.default.elements.find(filter.query).lean().exec();
                             res.status(200).send(elements);
                         }
