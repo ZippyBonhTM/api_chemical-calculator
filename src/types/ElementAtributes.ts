@@ -8,15 +8,24 @@ export type ElementType = {
   stateAtRoomTemp: ValueWithLink<ElementState>; // Estado do elemento na temperatura ambiente
   meltingPoint?: ValueWithLink<number>; // Ponto de fusão do elemento
   boilingPoint?: ValueWithLink<number>; // Ponto de ebulição do elemento
-  electronConfiguration: ValueWithLink<string>; // Configuração Eletrônica do elemento
+  electronConfiguration?: ValueWithLink<string>; // Configuração Eletrônica do elemento
+  electronegativity?: ValueWithLink<number>; // Eletronegatividade do elemento
+  atomicRadius?: ValueWithLink<number>; // Raio Atômico do elemento
+  ionizationEnergy?: ValueWithLink<number>; // Energia de Ionização do elemento
+  electronAffinity?: ValueWithLink<number>; // Afinidade Eletrônica do elemento
+  oxidationStates?: ValueWithLink<OxidationStatesType>; // Estados de oxidação
   description?: ValueWithLink<string>; // Descrição
   uses?: ValueWithLink<string>; // Usos do elemento
   history?: ValueWithLink<string>; // História
   interestingFacts?: ValueWithLink<string>; // Fatos interessantes sobre o elemento
   moreInfoLink?: string; // Página de mais informações sobre o elemento
-  group: number; // Grupo (colunas)
-  period: number; // Período (linhas)
+  position: {
+    group: number; // Grupo (colunas)
+    period: number; // Período (linhas)
+  };
 };
+
+export type OxidationStatesType = Array<number>;
 
 export type ReducedElementType = Pick<ElementType,
   "atomicNumber" |

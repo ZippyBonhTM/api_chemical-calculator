@@ -5,7 +5,8 @@ function elementParamsProcessor(input: Record<string, any>): { query: Record<str
   // Definir chaves válidas do schema, incluindo group e period
   const validKeys = [
     'name', 'symbol', 'atomicNumber', 'atomicWeight', 'category', 'stateAtRoomTemp',
-    'meltingPoint', 'boilingPoint', 'electronConfiguration', 'description', 'uses',
+    'meltingPoint', 'boilingPoint', 'electronConfiguration', 'electronegativity', 'atomicRadius',
+    'ionizationEnergy', 'electronAffinity', 'oxidationStates', 'description', 'uses',
     'history', 'interestingFacts', 'moreInfoLink', 'position', 'block', 'group', 'period'
   ] as const;
 
