@@ -53,7 +53,6 @@ export interface MapedElementType {
   interestingFacts?: string | null | undefined;
   moreInfoLink?: string | null | undefined;
   position: { group: number; period: number; };
-  block: 's' | 'p' | 'd' | 'f';
 }
 
 export type Position = { group: number, period: number; };
