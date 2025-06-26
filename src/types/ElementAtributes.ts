@@ -1,11 +1,11 @@
 // Padronização dos Elementos
 export type ElementType = {
-  name: ValueWithLink<string>; // Nome
-  symbol: ValueWithLink<string>; // Simbolo
+  name: string; // Nome
+  symbol: string; // Simbolo
   atomicNumber: ValueWithLink<number>; // Número Atômico
   atomicWeight: ValueWithLink<number>; // Peso Atômico
   category: ValueWithLink<ElementCategory>; // Categoria
-  stateAtRoomTemp: ValueWithLink<ElementState>; // Estado do elemento na temperatura ambiente
+  stateAtRoomTemp?: ValueWithLink<ElementState>; // Estado do elemento na temperatura ambiente
   meltingPoint?: ValueWithLink<number>; // Ponto de fusão do elemento
   boilingPoint?: ValueWithLink<number>; // Ponto de ebulição do elemento
   density?: ValueWithLink<number>; // Densidade do átomo

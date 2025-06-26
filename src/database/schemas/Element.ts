@@ -20,7 +20,6 @@ const ElementSchema = new Schema({
   name: p.string,
   symbol: {
     ...p.string,
-    required: true,
     validate: {
       validator: (v: string) => v.length > 0 && v.length < 3,
       message: (props: ValidatorProps) => `${props.value?.value} is not a valid symbol! Must be string and have 1 or 2 characters!`
@@ -73,7 +72,7 @@ const ElementSchema = new Schema({
   },
   stateAtRoomTemp: {
     type: ValueWithLinkSchema,
-    required: true,
+    required: false,
     validate: {
       validator: (v: any) => {
         if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
@@ -141,7 +140,7 @@ const ElementSchema = new Schema({
     required: false,
     validate: {
       validator: (v: any) => {
-        if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
+        if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "number") {
           return false;
         }
         return true;
@@ -193,7 +192,7 @@ const ElementSchema = new Schema({
     required: false,
     validate: {
       validator: (v: any) => {
-        if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
+        if (!v || typeof v !== "object" || !("value" in v) || Array.isArray(v)) {
           return false;
         }
         return validateOxidationStates(v.value).isValid;

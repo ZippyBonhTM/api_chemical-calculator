@@ -21,7 +21,7 @@ const ValueWithLinkSchema = new mongoose_1.Schema({
 }, { _id: false });
 const ElementSchema = new mongoose_1.Schema({
     name: utils_1.p.string,
-    symbol: Object.assign(Object.assign({}, utils_1.p.string), { required: true, validate: {
+    symbol: Object.assign(Object.assign({}, utils_1.p.string), { validate: {
             validator: (v) => v.length > 0 && v.length < 3,
             message: (props) => { var _a; return `${(_a = props.value) === null || _a === void 0 ? void 0 : _a.value} is not a valid symbol! Must be string and have 1 or 2 characters!`; }
         } }),
@@ -72,7 +72,7 @@ const ElementSchema = new mongoose_1.Schema({
     },
     stateAtRoomTemp: {
         type: ValueWithLinkSchema,
-        required: true,
+        required: false,
         validate: {
             validator: (v) => {
                 if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
@@ -140,7 +140,7 @@ const ElementSchema = new mongoose_1.Schema({
         required: false,
         validate: {
             validator: (v) => {
-                if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
+                if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "number") {
                     return false;
                 }
                 return true;
@@ -192,7 +192,7 @@ const ElementSchema = new mongoose_1.Schema({
         required: false,
         validate: {
             validator: (v) => {
-                if (!v || typeof v !== "object" || !("value" in v) || typeof v.value !== "string") {
+                if (!v || typeof v !== "object" || !("value" in v) || Array.isArray(v)) {
                     return false;
                 }
                 return (0, ValidateOxidationStates_1.default)(v.value).isValid;
