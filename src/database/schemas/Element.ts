@@ -265,13 +265,6 @@ const ElementSchema = new Schema({
     group: p.number,
     period: p.number
   },
-  block: {
-    ...p.string,
-    enum: {
-      values: ["s", "p", "d", "f"],
-      message: "{VALUE} is not a valid block! use s, p, d, or f!"
-    }
-  },
 });
 
 export default ElementSchema;
