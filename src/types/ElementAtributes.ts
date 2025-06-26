@@ -8,6 +8,7 @@ export type ElementType = {
   stateAtRoomTemp: ValueWithLink<ElementState>; // Estado do elemento na temperatura ambiente
   meltingPoint?: ValueWithLink<number>; // Ponto de fusão do elemento
   boilingPoint?: ValueWithLink<number>; // Ponto de ebulição do elemento
+  density?: ValueWithLink<number>; // Densidade do átomo
   electronConfiguration?: ValueWithLink<string>; // Configuração Eletrônica do elemento
   electronegativity?: ValueWithLink<number>; // Eletronegatividade do elemento
   atomicRadius?: ValueWithLink<number>; // Raio Atômico do elemento
