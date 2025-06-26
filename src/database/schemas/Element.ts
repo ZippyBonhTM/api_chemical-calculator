@@ -192,7 +192,7 @@ const ElementSchema = new Schema({
     required: false,
     validate: {
       validator: (v: any) => {
-        if (!v || typeof v !== "object" || !("value" in v) || Array.isArray(v)) {
+        if (!v || typeof v !== "object" || !("value" in v) || !Array.isArray(v.value)) {
           return false;
         }
         return validateOxidationStates(v.value).isValid;
