@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "start": "node --env-file=.env public/dist/app.js",
+    "start": "node --env-file=.env dist/app.js",
     "dev": "nodemon --exec 'ts-node -r tsconfig-paths/register src/app.ts'",
     "build": "tsc && tsc-alias",
     "test": "jest",
@@ -26,6 +26,7 @@
     "@types/mongoose": "^5.11.96",
     "@types/node": "^22.15.19",
     "nodemon": "^3.1.10",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
