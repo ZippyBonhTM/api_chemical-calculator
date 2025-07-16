@@ -20,7 +20,7 @@
     "build": "tsc && tsc-alias",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --watch --coverage",
+    "test:coverage": "jest --coverage",
     "clean": "rimraf dist"
   },
   "devDependencies": {

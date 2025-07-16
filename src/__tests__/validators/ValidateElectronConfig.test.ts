@@ -26,4 +26,13 @@ describe("Validators tests", () => {
 
     expect(testReturn.isValid).toBe(true);
   });
+
+  test("Must return {isValid: false, errors: ['Configuração eletrônica não pode ser vazia!']", () => {
+    const invalidElectronConfig = "";
+    const testReturn = validateElectronConfig(invalidElectronConfig);
+
+    expect(testReturn.isValid).toBe(false);
+    expect(testReturn.errors).toHaveLength(1);
+    expect(testReturn.errors[0]).toBe("Configuração eletrônica não pode ser vazia!");
+  });
 })
