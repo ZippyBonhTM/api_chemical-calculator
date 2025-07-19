@@ -37,7 +37,7 @@ export default function validateElectronConfig(config: ElectronConfig): { isVali
       errors.push(`Subnível inválido em "${part}". Deve ser s, p, d, ou f.`);
     }
     if (electrons < 1 || electrons > MAX_ELECTRONS[sublevel]) {
-      errors.push(`Número de elétros inválido em "${part}". Máximo para ${sublevel} é ${MAX_ELECTRONS[sublevel]}.`);
+      errors.push(`Número de elétrons inválido em "${part}". Máximo para ${sublevel} é ${MAX_ELECTRONS[sublevel]}.`);
     }
 
     // Verifica se o subnível é válido para o nível de energia
@@ -74,22 +74,3 @@ export default function validateElectronConfig(config: ElectronConfig): { isVali
     errors
   };
 };
-
-// // Função para testar a validação
-// function testElectronConfig(config: ElectronConfig): void {
-//   const result = validateElectronConfig(config);
-//   console.log(`Configuração: ${config}`);
-//   console.log(`Válida: ${result.isValid}`);
-//   if (result.errors.length > 0) {
-//     console.log("Erros:");
-//     result.errors.forEach(error => console.log(`- ${error}`));
-//   }
-//   console.log("---");
-// };
-
-// // Exemplos de uso
-// testElectronConfig('1s2 2s2 2p6 3s2 3p6 3d10 4s2');
-// testElectronConfig('1s2 2s2 2p6 2d5'); // Erro: subnível d inválido no nível 2
-// testElectronConfig('1s3 2s2'); // Erro: 3 elétrons em 1s
-// testElectronConfig('2s2 1s2'); // Erro: ordem incorreta
-// testElectronConfig(''); // Erro: vazio
