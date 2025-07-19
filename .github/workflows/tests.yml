@@ -9,8 +9,8 @@ jobs:
   build:
     runs_on: ubuntu-latest
     steps:
-     - uses: actions/checkout@v4
-     - name: npm install and npm run CI commands
+    - uses: actions/checkout@v4
+    - name: npm install and npm run CI commands
       run: |
         npm i
         npm run test
