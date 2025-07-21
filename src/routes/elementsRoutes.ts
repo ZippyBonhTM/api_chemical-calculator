@@ -1,4 +1,4 @@
-import ElementController from "@controllers/ElementController";
+import ElementController from "../controllers/ElementController";
 import { Router } from "express";
 
 const elementRoutes = Router();

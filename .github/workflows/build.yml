@@ -1,0 +1,20 @@
+# .github/workflows/build.yml
+name: build
+
+on:
+  workflow_call:
+    secrets:
+      MONGODB_URI:
+        required: true
+      PORT:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: build
+        run: |
+          npm i
+          npm run build

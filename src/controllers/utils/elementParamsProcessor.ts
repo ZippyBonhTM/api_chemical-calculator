@@ -1,5 +1,5 @@
 function elementParamsProcessor(input: Record<string, any>): { query: Record<string, any>, errors: string[] } {
-  let errors: string[] = [];
+  const errors: string[] = [];
   const query: Record<string, any> = {};
 
   // Definir chaves válidas do schema, incluindo group e period

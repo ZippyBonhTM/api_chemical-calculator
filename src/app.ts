@@ -10,7 +10,7 @@ import routes from "./routes";
 const PORT = process.env.PORT || 3010;
 
 const app = express();
-app.use(cors())
+app.use(cors());
 
 routes(app); // Aplica as rotas
 

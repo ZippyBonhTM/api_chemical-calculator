@@ -2,7 +2,7 @@ import { Schema, SchemaTypes, ValidatorProps } from "mongoose";
 import { p } from "../utils";
 import { ElementCategory, ElementState } from "../../types/ElementAtributes";
 import validateElectronConfig from "../../validators/ValidateElectronConfig";
-import validateOxidationStates from "validators/ValidateOxidationStates";
+import validateOxidationStates from "../../validators/ValidateOxidationStates";
 
 const ValueWithLinkSchema = new Schema({
   value: p.mixed,

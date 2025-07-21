@@ -1,5 +1,5 @@
 import express, { Express } from "express";
-import elementRoutes from "./elementRoutes";
+import elementRoutes from "./elementsRoutes";
 
 const routes = (app: Express) => {
   app.route("/").get((_, res) => {
