@@ -1,4 +1,4 @@
-import { ElectronConfig, MAX_ELECTRONS, Sublevel, SublevelConfig } from "@t/elements/EletronicConfig";
+import { ElectronConfig, MAX_ELECTRONS, Sublevel, SublevelConfig } from "@/types/elements/EletronicConfig";
 
 export default function validateElectronConfig(config: ElectronConfig): { isValid: boolean, errors: string[]; } {
   const errors: string[] = [];

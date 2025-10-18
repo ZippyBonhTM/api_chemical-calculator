@@ -1,8 +1,8 @@
 import { Schema, SchemaTypes, ValidatorProps } from "mongoose";
-import { p } from "../utils";
-import { ElementCategory, ElementState } from "@t/elements/ElementAtributes";
-import validateElectronConfig from "../../validators/ValidateElectronConfig";
-import validateOxidationStates from "../../validators/ValidateOxidationStates";
+import { p } from "@/database/utils";
+import { ElementCategory, ElementState } from "@/types/elements/ElementAtributes";
+import validateElectronConfig from "@/validators/ValidateElectronConfig";
+import validateOxidationStates from "@/validators/ValidateOxidationStates";
 
 const ValueWithLinkSchema = new Schema({
   value: p.mixed,

@@ -1,5 +1,5 @@
 import mongoose, { InferSchemaType, model } from "mongoose";
-import ElementSchema from "./schemas/Element";
+import ElementSchema from "@/database/schemas/Element";
 // import UserSchema from "./schemas/User";
 
 const MONGODB_URI = process.env.MONGODB_URI;

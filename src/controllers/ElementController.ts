@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { ElementType } from "../types/elements/ElementAtributes";
-import db from "../database";
+import { ElementType } from "@/types/elements/ElementAtributes";
+import db from "@/database";
 import elementParamsProcessor from "./utils/elementUtils/elementParamsProcessor";
 
 export default class ElementController {
