@@ -1,5 +1,5 @@
 import { ElementSchema } from "@db";
-import { MapedElementType } from "types/ElementAtributes";
+import { MapedElementType } from "@t/elements/ElementAtributes";
 
 function convertToMapedElementType(input: Partial<ElementSchema>): Partial<MapedElementType> {
   // Extrair position e block, se existirem

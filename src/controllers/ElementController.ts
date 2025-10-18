@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { ElementType } from "../types/ElementAtributes";
+import { ElementType } from "../types/elements/ElementAtributes";
 import db from "../database";
-import elementParamsProcessor from "./utils/elementParamsProcessor";
+import elementParamsProcessor from "./utils/elementUtils/elementParamsProcessor";
 
 export default class ElementController {
   /**
@@ -18,8 +18,10 @@ export default class ElementController {
       const newElement = await db.elements.create(protoElement);
 
       res.status(201).send(newElement.toJSON());
+      return
     } catch (err) {
       next(err);
+      return
     }
   }
 
@@ -38,19 +40,24 @@ export default class ElementController {
           if (filter.query) {
             const elements = await db.elements.find(filter.query).lean().exec();
             res.status(200).send(elements);
+            return
           } else {
             res.status(200).send([]);
+            return
           }
         } else {
           res.status(400).json({ message: "Sua query params está inválida!", erros: filter.errors });
+          return
         }
 
       } else {
         const allElements = db.elements.find().lean().exec();
         res.status(200).json(allElements);
+        return
       }
     } catch (err) {
       next(err);
+      return
     }
   }
 
@@ -62,11 +69,14 @@ export default class ElementController {
 
       if (!element) {
         res.status(400).json({ message: "Nenhum elemento foi encontrado!" });
-      } else {
-        res.status(200).send(element.toJSON());
+        return
       }
+
+      res.status(200).send(element.toJSON());
+      return
     } catch (err) {
       next(err);
+      return
     }
   }
 
@@ -86,13 +96,16 @@ export default class ElementController {
         res.status(400).json({
           message: "Um ou mais dados estão ausentes! Certifique-se de passar o id pelo parâmetro da url e os dados a serem atualizados!"
         });
+        return
       }
 
       const updatedElement = await db.elements.findByIdAndUpdate(ElementId, ElementData).lean().exec();
 
       res.status(200).json({ message: "Elemento editado com sucesso!", updatedElement });
+      return
     } catch (err) {
       next(err);
+      return
     }
   }
 
@@ -108,11 +121,15 @@ export default class ElementController {
       const elementId = req.params.id;
 
       const result = await db.elements.deleteOne({ _id: elementId });
-      if (result.deletedCount === 0) res.status(304).json({ message: "Nenhum elemento foi encontrado para ser deletado!" });
+      if (result.deletedCount === 0) {
+        res.status(304).json({ message: "Nenhum elemento foi encontrado para ser deletado!" });
+        return
+      }
 
       res.status(200).json({ message: "Elemento removido com sucesso!" });
     } catch (err) {
       next(err);
+      return
     }
   }
 };

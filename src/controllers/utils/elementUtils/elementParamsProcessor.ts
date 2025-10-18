@@ -52,8 +52,11 @@ function elementParamsProcessor(input: Record<string, any>): { query: Record<str
 
   // Mapear propriedades com { value, link } para [key].value
   for (const [key, valueWithLink] of Object.entries(rest)) {
-    if (valueWithLink && 'value' in valueWithLink) {
+    if (valueWithLink && 'value' in valueWithLink && key != 'symbol') {
       result[`${key}.value`] = valueWithLink.value;
+    }
+    if (key === 'symbol') {
+      result[`${key}`] = valueWithLink.value;
     }
   }
 

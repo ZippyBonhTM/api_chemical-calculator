@@ -1,6 +1,6 @@
 import { Schema, SchemaTypes, ValidatorProps } from "mongoose";
 import { p } from "../utils";
-import { ElementCategory, ElementState } from "../../types/ElementAtributes";
+import { ElementCategory, ElementState } from "@t/elements/ElementAtributes";
 import validateElectronConfig from "../../validators/ValidateElectronConfig";
 import validateOxidationStates from "../../validators/ValidateOxidationStates";
 

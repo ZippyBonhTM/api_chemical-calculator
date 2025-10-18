@@ -31,6 +31,7 @@
     "moduleResolution": "node",
     "baseUrl": "src",                                  /* Specify the base directory to resolve non-relative module names. */
     "paths": {
+      "@t/*": ["types/*"],
       "@db": ["database/index.ts"],
       "@controllers/*": ["controllers/*"],
       "@routes/*": ["routes/*"]
