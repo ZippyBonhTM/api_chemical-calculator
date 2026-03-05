@@ -1,4 +1,4 @@
-import { safeUserDto, userDb } from "@t/users/User";
+import { safeUserDto, userDb } from "@/";
 
 type RequiredUserParams = {
   username: string;
